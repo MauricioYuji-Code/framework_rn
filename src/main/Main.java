@@ -6,7 +6,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Weight testWeight = new Weight(1);
+        Weight testWeight = new Weight(2);
         System.out.println(testWeight.getValue());
 
         Neuron neuron1 = new Neuron();
