@@ -1,35 +1,34 @@
 package main;
 
 import core.*;
+import network.Perceptron;
+
+import java.util.ArrayList;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        Weight testWeight = new Weight(2);
-        System.out.println(testWeight.getValue());
-
         Neuron neuron1 = new Neuron();
         neuron1.setInput(1);
+
         Neuron neuron2 = new Neuron();
-        neuron2.setInput(1);
+        neuron2.setInput(2);
+
         Neuron neuron3 = new Neuron();
+        neuron1.addInputConnection(neuron3, 1);
+        neuron2.addInputConnection(neuron3, 2);
 
-        Connection connection1 = new Connection(neuron1, neuron3);
-        Connection connection2 = new Connection(neuron2, neuron3);
+        ArrayList<Neuron> neurons = new ArrayList<>();
+        neurons.add(neuron1);
+        neurons.add(neuron2);
+        neurons.add(neuron3);
 
-        connection1.setWeight(testWeight);
-        connection2.setWeight(testWeight);
+        Perceptron perceptron = new Perceptron(neurons);
 
-        Layer inputLayer = new Layer();
-        Layer outputLayer = new Layer();
 
-        inputLayer.addNeuron(neuron1);
-        inputLayer.addNeuron(neuron2);
-        outputLayer.addNeuron(neuron3);
 
-        NeuralNetwork perceptron = new NeuralNetwork();
-        perceptron.addLayer(inputLayer);
-        perceptron.addLayer(outputLayer);
+//        System.out.println(neuron1.getInputConnections().get(0).getWeight().getValue());
+
     }
 }
