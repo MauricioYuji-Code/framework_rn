@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class Mlp {
     private ArrayList<Neuron> neurons;
     private double bias = 0;
-    private double predict = 0;
+    private double predict = 0.7;
     private double error;
     private double output;
     private double deltaW1;
@@ -18,7 +18,7 @@ public class Mlp {
     private double deltaWO1;
     private double deltaWO2;
     private double deltaB;
-    private double lr = 0.1;
+    private double lr = 0.9;
     int e = 0;
 
 
@@ -106,7 +106,7 @@ public class Mlp {
     public void iteration() {
 
         //Processo oculta1
-        // (e1 * w1) + (e2 * w1) = o1
+        // (e1 * w1) + (e2 * w3) = o1
         neurons.get(2).setInput(sum(neurons.get(0).getNetInput(), neurons.get(1).getNetInput(), neurons.get(0).getInputConnections().get(0).getWeight().getValue(), neurons.get(1).getInputConnections().get(0).getWeight().getValue()));
         //Processo oculta2
         // (e1 * w2) + (e2 * w4) = o1
@@ -153,21 +153,25 @@ public class Mlp {
             System.out.println("Novo peso WO2..." + neurons.get(2).getInputConnections().get(0).getWeight().getValue());
 
             //Oculta para entrada
-//            System.out.println("Cálculo variação do peso...");
-//            deltaW1 = deltaWeigthCalc(error, lr, neurons.get(0).getNetInput());
-//            deltaW2 = deltaWeigthCalc(error, lr, neurons.get(1).getNetInput());
-//            System.out.println("Variação do peso W1..." + getDeltaW1());
-//            System.out.println("Variação do peso W2..." + getDeltaW2());
-//
-//            System.out.println("Cálculo variação do bias...");
-//            deltaB = deltaBiasCalc(error, lr);
-//            System.out.println("Cariação do bias..." + getBias());
-//
+            System.out.println("Cálculo variação do peso...");
+            deltaW1 = deltaWeigthCalc(error, lr, neurons.get(0).getNetInput());
+            deltaW3 = deltaWeigthCalc(error, lr, neurons.get(0).getNetInput());
+            System.out.println("Variação do peso W1..." + getDeltaW1());
+            System.out.println("Variação do peso W3..." + getDeltaW3());
+            deltaW1 = deltaWeigthCalc(error, lr, neurons.get(1).getNetInput());
+            deltaW3 = deltaWeigthCalc(error, lr, neurons.get(1).getNetInput());
+            System.out.println("Variação do peso W2..." + getDeltaW2());
+            System.out.println("Variação do peso W4..." + getDeltaW4());
+
 //            System.out.println("Calculando novos pesos...");
-//            neurons.get(0).getInputConnections().get(0).getWeight().setValue(newWeightCalc(neurons.get(0).getInputConnections().get(0).getWeight().getValue(), deltaW1));
-//            neurons.get(1).getInputConnections().get(0).getWeight().setValue(newWeightCalc(neurons.get(1).getInputConnections().get(0).getWeight().getValue(), deltaW2));
-//            System.out.println("Novo peso W1..." + neurons.get(0).getInputConnections().get(0).getWeight().getValue());
-//            System.out.println("Novo peso W2..." + neurons.get(1).getInputConnections().get(0).getWeight().getValue());
+            neurons.get(0).getInputConnections().get(0).getWeight().setValue(newWeightCalc(neurons.get(0).getInputConnections().get(0).getWeight().getValue(), deltaW1));
+            neurons.get(0).getInputConnections().get(1).getWeight().setValue(newWeightCalc(neurons.get(0).getInputConnections().get(1).getWeight().getValue(), deltaW3));
+            neurons.get(1).getInputConnections().get(0).getWeight().setValue(newWeightCalc(neurons.get(1).getInputConnections().get(0).getWeight().getValue(), deltaW2));
+            neurons.get(1).getInputConnections().get(1).getWeight().setValue(newWeightCalc(neurons.get(1).getInputConnections().get(1).getWeight().getValue(), deltaW4));
+            System.out.println("Novo peso W1..." + neurons.get(0).getInputConnections().get(0).getWeight().getValue());
+            System.out.println("Novo peso W3..." + neurons.get(0).getInputConnections().get(1).getWeight().getValue());
+            System.out.println("Novo peso W2..." + neurons.get(1).getInputConnections().get(0).getWeight().getValue());
+            System.out.println("Novo peso W4..." + neurons.get(1).getInputConnections().get(1).getWeight().getValue());
 //
             System.out.println("Cálculo variação do bias...");
             deltaB = deltaBiasCalc(error, lr);
@@ -175,10 +179,10 @@ public class Mlp {
             System.out.println("Novo bias...");
             this.bias = newBiasCalc(bias, deltaB);
             System.out.println("Valor do novo bias..." + getBias());
-//
-//            System.out.println("Epoca:" + e + "\n");
-//            e++;
-            //iteration();
+
+            System.out.println("Epoca:" + e + "\n");
+            e++;
+            iteration();
         }
     }
 

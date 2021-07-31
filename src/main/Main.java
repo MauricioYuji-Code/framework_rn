@@ -26,9 +26,9 @@ public class Main {
 
         //TODO Execução de um MLP
         Neuron inputNeuron1 = new Neuron();
-        inputNeuron1.setInput(0);
+        inputNeuron1.setInput(1);
         Neuron inputNeuron2 = new Neuron();
-        inputNeuron2.setInput(0);
+        inputNeuron2.setInput(1);
         Neuron hidenNeuron1 = new Neuron();
         Neuron hidenNeuron2 = new Neuron();
         Neuron outputNeuron1 = new Neuron();
