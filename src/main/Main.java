@@ -1,6 +1,7 @@
 package main;
 
 import core.*;
+import network.Mlp;
 import network.Perceptron;
 
 import java.util.ArrayList;
@@ -31,12 +32,12 @@ public class Main {
         Neuron hidenNeuron1 = new Neuron();
         Neuron hidenNeuron2 = new Neuron();
         Neuron outputNeuron1 = new Neuron();
-        inputNeuron1.addInputConnection(hidenNeuron1);
-        inputNeuron1.addInputConnection(hidenNeuron2);
-        inputNeuron2.addInputConnection(hidenNeuron1);
-        inputNeuron2.addInputConnection(hidenNeuron2);
-        hidenNeuron1.addInputConnection(outputNeuron1);
-        hidenNeuron2.addInputConnection(outputNeuron1);
+        inputNeuron1.addInputConnection(hidenNeuron1, 1);
+        inputNeuron1.addInputConnection(hidenNeuron2, 1);
+        inputNeuron2.addInputConnection(hidenNeuron1, 1);
+        inputNeuron2.addInputConnection(hidenNeuron2, 1);
+        hidenNeuron1.addInputConnection(outputNeuron1, 1);
+        hidenNeuron2.addInputConnection(outputNeuron1, 1);
 
         ArrayList<Neuron> neurons = new ArrayList<>();
         neurons.add(inputNeuron1);
@@ -46,6 +47,7 @@ public class Main {
         neurons.add(outputNeuron1);
 
 
+        Mlp mlpTest = new Mlp(neurons);
 
 
     }
