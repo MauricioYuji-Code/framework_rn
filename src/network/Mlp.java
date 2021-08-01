@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class Mlp {
     private ArrayList<Neuron> neurons;
     private double bias = 0;
-    private double predict = 0.7;
+    private double predict = 0.0;
     private double error;
     private double output;
     private double deltaW1;
@@ -18,7 +18,7 @@ public class Mlp {
     private double deltaWO1;
     private double deltaWO2;
     private double deltaB;
-    private double lr = 0.9;
+    private double lr = 2;
     int e = 0;
 
 
@@ -28,31 +28,31 @@ public class Mlp {
     }
 
     public double errorCalc(double t, double s) {
-        return t - s;
+        return Math.floor((t - s) * 100) / 100;
     }
 
     public double deltaWeigthCalc(double e, double lr, double input) {
-        return e * lr * input;
+        return Math.floor((e * lr * input) * 100) / 100;
     }
 
     public double deltaBiasCalc(double e, double lr) {
-        return e * lr;
+        return Math.floor((e * lr) * 100) / 100;
     }
 
     public double newWeightCalc(double w, double deltaW) {
-        return deltaW + w;
+        return Math.floor((deltaW + w) * 100) / 100;
     }
 
     public double newBiasCalc(double b, double deltaB) {
-        return deltaB + b;
+        return Math.floor((deltaB + b) * 100) / 100;
     }
 
     public double sigmoid(double n) {
-        return 1 / (1 + Math.exp(-n));
+        return Math.floor((1 / (1 + Math.exp(-n))) * 100) / 100;
     }
 
     public double sum(double ge1, double ge2, double gw1, double gw2) {
-        return (ge1 * gw1) + (ge2 * gw2) + this.bias;
+        return Math.floor(((ge1 * gw1) + (ge2 * gw2) + this.bias) * 100) / 100;
     }
 
     public double getError() {
