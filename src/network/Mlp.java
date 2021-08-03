@@ -48,7 +48,7 @@ public class Mlp {
     }
 
     public double sigmoid(double n) {
-        return Math.floor((1 / (1 + Math.exp(-n))) * 100) / 100;
+        return 1 / (1 + Math.exp(-n));
     }
 
     public double sum(double ge1, double ge2, double gw1, double gw2) {
@@ -126,6 +126,7 @@ public class Mlp {
         //Função de ativação
         neurons.get(4).setInput(sigmoid(neurons.get(4).getNetInput()));
         output = neurons.get(4).getNetInput();
+        output = rounding(output);
         System.out.println("Valor saida1: " + output);
 
         if (output == predict) {
@@ -186,4 +187,13 @@ public class Mlp {
         }
     }
 
+    public double rounding(double output) {
+        if (output <= 0.000000001) {
+            return 0;
+        } else if (output >= 0.99) {
+            return 1;
+        } else {
+            return output;
+        }
+    }
 }

@@ -10,7 +10,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        //TODO Execução de um perceptron
+        //Execução de um perceptron
 //        Neuron neuron1 = new Neuron();
 //        neuron1.setInput(1);
 //        Neuron neuron2 = new Neuron();
@@ -24,7 +24,7 @@ public class Main {
 //        neurons.add(neuron3);
 //        Perceptron perceptron = new Perceptron(neurons);
 
-        //TODO Execução de um MLP
+        //Execução de um MLP
         Neuron inputNeuron1 = new Neuron();
         inputNeuron1.setInput(1);
         Neuron inputNeuron2 = new Neuron();
