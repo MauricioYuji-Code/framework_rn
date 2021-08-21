@@ -1,5 +1,6 @@
 package core;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -107,15 +108,15 @@ public class NeuralNetwork {
     }
 
 
-    public double[] getOutput() {
-        int i = 0;
-        for (Neuron c : outputNeurons) {
-            outputBuffer[i] = c.getOutput();
-            i++;
-        }
-
-        return outputBuffer;
-    }
+//    public double[] getOutput() {
+//        int i = 0;
+//        for (Neuron c : outputNeurons) {
+//            outputBuffer[i] = c.getOutput();
+//            i++;
+//        }
+//
+//        return outputBuffer;
+//    }
 
 
     public List<Neuron> getInputNeurons() {
@@ -217,4 +218,36 @@ public class NeuralNetwork {
     public void setLabel(String label) {
         this.label = label;
     }
+
+    //TODO
+
+    public void setStructure(int index, int nLayer, int nNeuron) {
+
+    }
+
+    public void setInputValues(List inputValues) {
+
+    }
+
+    public void setInputWeights(double[][] inputWeights) {
+
+    }
+
+    public void setHiddenWeights(double[][] hiddenWeights) {
+
+    }
+
+    public void setActivationFunction(Type t) {
+
+    }
+
+    public void sigmoidFunction(){
+
+    }
+
+    public void start() {
+
+    }
+
+
 }

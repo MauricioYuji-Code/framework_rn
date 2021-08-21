@@ -5,7 +5,7 @@ import core.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Perceptron {
+public class Perceptron extends NeuralNetwork {
     private ArrayList<Neuron> neurons;
     private double bias = 0;
     private double predict = 0;
@@ -17,10 +17,21 @@ public class Perceptron {
     private double lr = 0.1;
     int e = 0;
 
+    NeuralNetwork nn;
+    Layer l;
+    Neuron n;
+
     public Perceptron(ArrayList<Neuron> neurons) {
         this.neurons = neurons;
         iteration();
     }
+
+    public Perceptron() {
+        this.nn = new NeuralNetwork();
+        this.l = new Layer();
+        this.n = new Neuron();
+    }
+
 
     public Perceptron(ArrayList<Neuron> neurons, double bias, double predict) {
         this.neurons = neurons;
@@ -136,5 +147,17 @@ public class Perceptron {
             e++;
             iteration();
         }
+    }
+
+    //TODO
+    @Override
+    public void setStructure(int index, int nLayer, int nNeuron) {
+        if (index >= 2) {
+            System.out.println("Isso não é um perceptron!!");
+            System.exit(0);
+        }
+
+
+
     }
 }

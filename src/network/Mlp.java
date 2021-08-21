@@ -28,31 +28,31 @@ public class Mlp {
     }
 
     public double errorCalc(double t, double s) {
-        return Math.floor((t - s) * 100) / 100;
+        return Math.floor((t - s) * 1000) / 1000;
     }
 
     public double deltaWeigthCalc(double e, double lr, double input) {
-        return Math.floor((e * lr * input) * 100) / 100;
+        return Math.floor((e * lr * input) * 1000) / 1000;
     }
 
     public double deltaBiasCalc(double e, double lr) {
-        return Math.floor((e * lr) * 100) / 100;
+        return Math.floor((e * lr) * 1000) / 1000;
     }
 
     public double newWeightCalc(double w, double deltaW) {
-        return Math.floor((deltaW + w) * 100) / 100;
+        return Math.floor((deltaW + w) * 1000) / 1000;
     }
 
     public double newBiasCalc(double b, double deltaB) {
-        return Math.floor((deltaB + b) * 100) / 100;
+        return Math.floor((deltaB + b) * 1000) / 1000;
     }
 
     public double sigmoid(double n) {
-        return 1 / (1 + Math.exp(-n));
+        return Math.floor(1 / (1 + Math.exp(-n))* 1000) / 1000;
     }
 
     public double sum(double ge1, double ge2, double gw1, double gw2) {
-        return Math.floor(((ge1 * gw1) + (ge2 * gw2) + this.bias) * 100) / 100;
+        return Math.floor(((ge1 * gw1) + (ge2 * gw2) + this.bias) * 1000) / 1000;
     }
 
     public double getError() {
@@ -103,8 +103,7 @@ public class Mlp {
         return lr;
     }
 
-    public void iteration() {
-
+    public int iteration() {
         //Processo oculta1
         // (e1 * w1) + (e2 * w3) = o1
         neurons.get(2).setInput(sum(neurons.get(0).getNetInput(), neurons.get(1).getNetInput(), neurons.get(0).getInputConnections().get(0).getWeight().getValue(), neurons.get(1).getInputConnections().get(0).getWeight().getValue()));
@@ -131,6 +130,7 @@ public class Mlp {
 
         if (output == predict) {
             System.out.println("Sucesso");
+            return 1;
         } else {
             //Todo terminar o backpropagation
             System.out.println("saida " + output + " valor desejado " + predict);
@@ -173,7 +173,7 @@ public class Mlp {
             System.out.println("Novo peso W3..." + neurons.get(0).getInputConnections().get(1).getWeight().getValue());
             System.out.println("Novo peso W2..." + neurons.get(1).getInputConnections().get(0).getWeight().getValue());
             System.out.println("Novo peso W4..." + neurons.get(1).getInputConnections().get(1).getWeight().getValue());
-//
+
             System.out.println("Cálculo variação do bias...");
             deltaB = deltaBiasCalc(error, lr);
             System.out.println("Cariação do bias..." + getBias());
@@ -183,12 +183,12 @@ public class Mlp {
 
             System.out.println("Epoca:" + e + "\n");
             e++;
-            iteration();
+            return iteration();
         }
     }
 
     public double rounding(double output) {
-        if (output <= 0.000000001) {
+        if (output <= 0.001) {
             return 0;
         } else if (output >= 0.99) {
             return 1;
