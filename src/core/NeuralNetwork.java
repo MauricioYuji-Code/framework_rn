@@ -253,4 +253,6 @@ public class NeuralNetwork {
     }
 
 
+    public void connectNeuronIncludingWeigth(int weigthValue) {
+    }
 }

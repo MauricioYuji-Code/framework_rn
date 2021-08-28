@@ -47,20 +47,21 @@ public class Main {
 //
 //        Mlp mlpTest = new Mlp(neurons);
 
-        NeuralNetwork nn = new Perceptron();
-        nn.setStructure("input", 1, 5);
+        NeuralNetwork nn = new Perceptron(0.1, 0, 0);
+        nn.setStructure("input", 1, 3);
         nn.setStructure("output", 1, 1);
-        double sample[] = {1, 1, 2, 2, 3};
-        double sample2[] = {1, 2, 3, 4, 5};
+        double sample[] = {0, 1, 0};
+        double sample2[] = {1, 0, 1};
         ArrayList<double[]> list = new ArrayList<>();
         list.add(0, sample);
         list.add(1, sample2);
         nn.setInputValues(list);
-        double[][] weightInput = {{0.5, 1.5}, {0.4, 0.7}, {0.2, 0.8}};
-        double[][] weightHidden = {{0.3, 0.2}, {0.1, 0.5}};
-        nn.setInputWeights(weightInput);
-        nn.setHiddenWeights(weightHidden);
-        nn.sigmoidFunction();
+        nn.connectNeuronIncludingWeigth(1);
+//        double[][] weightInput = {{0.5, 1.5}, {0.4, 0.7}, {0.2, 0.8}};
+//        double[][] weightHidden = {{0.3, 0.2}, {0.1, 0.5}};
+//        nn.setInputWeights(weightInput);
+//        nn.setHiddenWeights(weightHidden);
+//        nn.sigmoidFunction();
         nn.start();
     }
 }
