@@ -221,11 +221,14 @@ public class NeuralNetwork {
 
     //TODO
 
-    public void setStructure(int index, int nLayer, int nNeuron) {
+    public void setStructure(String type, int nLayer, int nNeuron) {
+
 
     }
 
-    public void setInputValues(List inputValues) {
+    public void setInputValues(ArrayList inputValues) {
+
+
 
     }
 

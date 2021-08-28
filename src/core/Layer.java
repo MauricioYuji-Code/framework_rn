@@ -39,6 +39,10 @@ public class Layer {
      */
     public Layer(int neuronsCount) {
         neurons = new ArrayList<>(neuronsCount);
+        for (int n = 1 ; n <= neuronsCount ; n++){
+            Neuron neuron = new Neuron();
+            neurons.add(neuron);
+        }
     }
 
 
