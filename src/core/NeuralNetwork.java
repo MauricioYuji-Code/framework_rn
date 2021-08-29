@@ -17,6 +17,8 @@ public class NeuralNetwork {
 
     private String label = "";
 
+    private Layer input;
+
 
     public NeuralNetwork() {
         this.layers = new ArrayList<>();
@@ -227,9 +229,12 @@ public class NeuralNetwork {
     }
 
     public void setInputValues(ArrayList inputValues) {
-
-
-
+        ArrayList<double[]> samples = inputValues;
+        System.out.println("Valores da camada de entrada: ");
+        for (int i = 0; i < input.getNeuronsCount(); i++) {
+            input.getNeurons().get(i).setInput(samples.get(0)[i]); //Exemplo apenas da primeira amostra
+            System.out.println(input.getNeurons().get(i).getNetInput());
+        }
     }
 
     public void setInputWeights(double[][] inputWeights) {

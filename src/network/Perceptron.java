@@ -1,9 +1,7 @@
 package network;
-
 import core.*;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Perceptron extends NeuralNetwork {
     private double bias = 0;
@@ -30,7 +28,6 @@ public class Perceptron extends NeuralNetwork {
         return e * lr * input;
     }
 
-    //TODO Analisar se necessário o calculo da viariação do bias
     public double deltaBiasCalc(double e, double lr) {
         return e * lr;
     }
@@ -43,11 +40,15 @@ public class Perceptron extends NeuralNetwork {
         return deltaB + b;
     }
 
-    //TODO
     @Override
     public void setStructure(String type, int nLayer, int nNeuron) {
         if (type.equals("hidden")) {
             System.out.println("Isso não é um perceptron!!");
+            System.exit(0);
+        }
+
+        if (nLayer <= 0 || nNeuron <= 0) {
+            System.out.println("Ops, algo errado no numero de camadas/neurônios");
             System.exit(0);
         }
 
@@ -90,7 +91,6 @@ public class Perceptron extends NeuralNetwork {
             input.getNeurons().get(i).addInputConnection(output.getNeurons().get(0), weigthValue);
             System.out.println("O neurônio " + input.getNeurons().get(i).getNetInput() + " tem conexão? " + input.getNeurons().get(i).hasInputConnections());
         }
-
     }
 
     public void start() {
