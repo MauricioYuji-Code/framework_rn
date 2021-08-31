@@ -1,4 +1,5 @@
 package network;
+
 import core.*;
 
 import java.util.ArrayList;
@@ -13,6 +14,10 @@ public class Perceptron extends NeuralNetwork {
     //    int e = 0;
     private Layer input;
     private Layer output;
+    private int sampleCount = 0;
+    private ArrayList<double[]> samples;
+    //Variaveis auxiliares
+    int count = 1;
 
     public Perceptron(double learningRate, double predict, double bias) {
         this.learningRate = learningRate;
@@ -73,10 +78,11 @@ public class Perceptron extends NeuralNetwork {
 
     @Override
     public void setInputValues(ArrayList inputValues) {
-        ArrayList<double[]> samples = inputValues;
+        this.samples = inputValues;
+        System.out.println("Tamanho do input values " + inputValues.size());
         System.out.println("Valores da camada de entrada: ");
         for (int i = 0; i < input.getNeuronsCount(); i++) {
-            input.getNeurons().get(i).setInput(samples.get(0)[i]); //Exemplo apenas da primeira amostra
+            input.getNeurons().get(i).setInput(samples.get(sampleCount)[i]); //Exemplo apenas da primeira amostra
             System.out.println(input.getNeurons().get(i).getNetInput());
         }
 
@@ -93,6 +99,23 @@ public class Perceptron extends NeuralNetwork {
         }
     }
 
+    public void checkNextSamples() {
+        System.out.println("Checando próximas amostras...");
+        if (count != samples.size()) {
+            System.out.println("count: " + count + " samples size: " + samples.size());
+            System.out.println("Proximas amostras encontradas");
+            System.out.println("Começando o treinamento!");
+            sampleCount++;
+            System.out.println("samples counter: " + sampleCount);
+            setInputValues(samples);
+            connectNeuronIncludingWeigth(0); //Todo verificar os pesos
+            count++;
+            start();
+        } else {
+            System.out.println("Não existe próximas camadas, treinamento finalizado!");
+        }
+    }
+
     public void start() {
         System.out.println("Start Perceptron!!");
         output.getNeurons().get(0).setOutput(FunctionActivation.degrau(sum()));
@@ -105,6 +128,7 @@ public class Perceptron extends NeuralNetwork {
             backPropagation();
         }
         System.out.println("Rede treinada! \nResultado final da saída: " + output.getNeurons().get(0).getOutput() + " Valor esperado: " + predict);
+        checkNextSamples();
 
 
     }
