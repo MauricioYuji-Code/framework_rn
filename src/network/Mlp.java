@@ -85,13 +85,24 @@ public class Mlp extends NeuralNetwork {
     public void connectNeuronIncludingWeigth(int weigthValue) {
         System.out.println("Conectando os neurônios");
         int i = 0;
-        while (i <= hidden.getNeuronsCount()) {
-            System.out.println("Passou por aqui");
+        int k = 0;
+        System.out.println("Conectando da entrada até a oculta...");
+        System.out.println("Numero de neuronios na oculta: " + hidden.getNeuronsCount());
+        while (i < input.getNeuronsCount()) {
             for (int j = 0; j < hidden.getNeuronsCount(); j++) {
                 input.getNeurons().get(i).addInputConnection(hidden.getNeurons().get(j), weigthValue);
                 System.out.println("O neurônio: " + input.getNeurons().get(i).getNetInput() + " quantas conexões: " + input.getNeurons().get(i).getInputConnections().size() + " e está conectado com o neurônio posição: " + j);
             }
             i++;
+        }
+        System.out.println("Conectando da oculta até a saída...");
+        System.out.println("Numero de neuronios na saida: " + output.getNeuronsCount());
+        while (k < hidden.getNeuronsCount()) {
+            for (int j = 0; j < output.getNeuronsCount(); j++) {
+                hidden.getNeurons().get(k).addInputConnection(output.getNeurons().get(j), weigthValue);
+                System.out.println("O neurônio: " + hidden.getNeurons().get(k).getNetInput() + " quantas conexões: " + hidden.getNeurons().get(k).getInputConnections().size() + " e está conectado com o neurônio posição: " + j);
+            }
+            k++;
         }
     }
 
