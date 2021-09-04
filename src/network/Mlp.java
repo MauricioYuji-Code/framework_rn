@@ -108,12 +108,15 @@ public class Mlp extends NeuralNetwork {
 
     @Override
     public void start() {
-
+        System.out.println("Start MLP!!!");
+        System.out.println("Start sum...");
         sum();
+        System.out.println("Start check outputs...");
+        checkOutputs();
+        System.out.println("Retorno da checagem: " + checkOutputs());
 
     }
 
-    // aux += (input.getNeurons().get(i).getNetInput() * input.getNeurons().get(i).getInputConnections().get(0).getWeight().getValue()) + bias;
     public void sum() {
         System.out.println("Realizando a somatória");
         int auxHidden = 0;
@@ -124,13 +127,13 @@ public class Mlp extends NeuralNetwork {
 
         while (auxHidden < hidden.getNeuronsCount()) {
             for (int i = 0; i < input.getNeuronsCount(); i++) {
-                 aux += input.getNeurons().get(i).getNetInput() * input.getNeurons().get(i).getInputConnections().get(auxHidden).getWeight().getValue();
+                aux += input.getNeurons().get(i).getNetInput() * input.getNeurons().get(i).getInputConnections().get(auxHidden).getWeight().getValue();
                 System.out.println("Valore da variavel aux da oculta: " + aux);
             }
 //            hiddenS.add(auxHidden, aux + bias);
 //            System.out.println("Valores da somatoria da camada oculta: " + hiddenS.get(auxHidden));
             hidden.getNeurons().get(auxHidden).setInput(FunctionActivation.sigmoid(aux));
-            auxHidden ++;
+            auxHidden++;
             aux = 0;
         }
 
@@ -141,11 +144,30 @@ public class Mlp extends NeuralNetwork {
             }
 //            outputS.add(auxOutput, aux + bias);
 //            System.out.println("Valores da somatoria da camada saida: " + outputS.get(auxOutput));
-            output.getNeurons().get(auxOutput).setOutput(FunctionActivation.sigmoid(aux));
-            auxOutput ++;
+            output.getNeurons().get(auxOutput).setOutput(FunctionActivation.degrau(aux));
+            auxOutput++;
             aux = 0;
         }
     }
+
+    public boolean checkOutputs() {
+        int s = 0;
+        for (int i = 0; i < output.getNeuronsCount(); i++) {
+            if (output.getNeurons().get(i).getOutput() == predict) {
+                System.out.println("O neuronio de posição " + i + "retornou: " + output.getNeurons().get(i).getOutput() + " e o valor esperado é: " + predict + " (SUCESSO)");
+                s++;
+            } else {
+                System.out.println("O neuronio de posição " + i + "retornou: " + output.getNeurons().get(i).getOutput() + " e o valor esperado é: " + predict + " (FALHA)");
+            }
+        }
+
+        if (s > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
 // OLD
 //    public Mlp(ArrayList<Neuron> neurons) {
