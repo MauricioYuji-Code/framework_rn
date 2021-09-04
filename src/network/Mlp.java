@@ -106,6 +106,28 @@ public class Mlp extends NeuralNetwork {
         }
     }
 
+    @Override
+    public void start() {
+
+        sum();
+
+    }
+
+    // aux += (input.getNeurons().get(i).getNetInput() * input.getNeurons().get(i).getInputConnections().get(0).getWeight().getValue()) + bias;
+    public void sum() {
+        System.out.println("Realizando a somatória");
+        int auxHidden = 0;
+        int auxOutput = 0;
+        double aux = 0;
+
+        while (auxHidden < hidden.getNeuronsCount()) {
+            for (int i = 0; i < input.getNeuronsCount(); i++) {
+                 aux =+ (input.getNeurons().get(i).getNetInput() * input.getNeurons().get(i).getInputConnections().get(auxHidden).getWeight().getValue()) ;
+            }
+            auxHidden ++;
+        }
+    }
+
 // OLD
 //    public Mlp(ArrayList<Neuron> neurons) {
 //        this.neurons = neurons;

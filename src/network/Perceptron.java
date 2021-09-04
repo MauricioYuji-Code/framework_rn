@@ -137,8 +137,9 @@ public class Perceptron extends NeuralNetwork {
         System.out.println("Realizando a somatória...");
         double aux = 0;
         for (int i = 0; i < input.getNeuronsCount(); i++) {
-            aux += (input.getNeurons().get(i).getNetInput() * input.getNeurons().get(i).getInputConnections().get(0).getWeight().getValue()) + bias;
+            aux += (input.getNeurons().get(i).getNetInput() * input.getNeurons().get(i).getInputConnections().get(0).getWeight().getValue());
         }
+        aux = aux + bias;
         System.out.println("Resultado da somatória: " + aux);
         return aux;
     }
