@@ -119,12 +119,31 @@ public class Mlp extends NeuralNetwork {
         int auxHidden = 0;
         int auxOutput = 0;
         double aux = 0;
+//        ArrayList <Double> hiddenS = new ArrayList<>();
+//        ArrayList <Double> outputS = new ArrayList<>();
 
         while (auxHidden < hidden.getNeuronsCount()) {
             for (int i = 0; i < input.getNeuronsCount(); i++) {
-                 aux =+ (input.getNeurons().get(i).getNetInput() * input.getNeurons().get(i).getInputConnections().get(auxHidden).getWeight().getValue()) ;
+                 aux += input.getNeurons().get(i).getNetInput() * input.getNeurons().get(i).getInputConnections().get(auxHidden).getWeight().getValue();
+                System.out.println("Valore da variavel aux da oculta: " + aux);
             }
+//            hiddenS.add(auxHidden, aux + bias);
+//            System.out.println("Valores da somatoria da camada oculta: " + hiddenS.get(auxHidden));
+            hidden.getNeurons().get(auxHidden).setInput(FunctionActivation.sigmoid(aux));
             auxHidden ++;
+            aux = 0;
+        }
+
+        while (auxOutput < output.getNeuronsCount()) {
+            for (int i = 0; i < hidden.getNeuronsCount(); i++) {
+                aux += hidden.getNeurons().get(i).getNetInput() * hidden.getNeurons().get(i).getInputConnections().get(auxOutput).getWeight().getValue();
+                System.out.println("Valore da variavel aux da saida: " + aux);
+            }
+//            outputS.add(auxOutput, aux + bias);
+//            System.out.println("Valores da somatoria da camada saida: " + outputS.get(auxOutput));
+            output.getNeurons().get(auxOutput).setOutput(FunctionActivation.sigmoid(aux));
+            auxOutput ++;
+            aux = 0;
         }
     }
 
