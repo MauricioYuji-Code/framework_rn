@@ -123,9 +123,9 @@ public class Perceptron extends NeuralNetwork {
         while (output.getNeurons().get(0).getOutput() != predict) {
             System.out.println("A rede precisa de treinamento, resultado não corresponde com o esperado");
             System.out.println("iniciando treinamento...");
+            backPropagation();
             output.getNeurons().get(0).setOutput(FunctionActivation.degrau(sum()));
             System.out.println("Valor do neurônio de saída: " + output.getNeurons().get(0).getOutput());
-            backPropagation();
         }
         System.out.println("Rede treinada! \nResultado final da saída: " + output.getNeurons().get(0).getOutput() + " Valor esperado: " + predict);
         checkNextSamples();

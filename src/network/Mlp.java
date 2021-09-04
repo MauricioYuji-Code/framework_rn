@@ -112,8 +112,11 @@ public class Mlp extends NeuralNetwork {
         System.out.println("Start sum...");
         sum();
         System.out.println("Start check outputs...");
-        checkOutputs();
-        System.out.println("Retorno da checagem: " + checkOutputs());
+        while (!checkOutputs()){
+            System.out.println("A rede precisa de treinamento, resultado não corresponde com o esperado");
+            System.out.println("iniciando treinamento...");
+        }
+        System.out.println("Rede treinada!");
 
     }
 
@@ -154,10 +157,10 @@ public class Mlp extends NeuralNetwork {
         int s = 0;
         for (int i = 0; i < output.getNeuronsCount(); i++) {
             if (output.getNeurons().get(i).getOutput() == predict) {
-                System.out.println("O neuronio de posição " + i + "retornou: " + output.getNeurons().get(i).getOutput() + " e o valor esperado é: " + predict + " (SUCESSO)");
+                System.out.println("O neuronio de posição " + i + " retornou: " + output.getNeurons().get(i).getOutput() + " e o valor esperado é: " + predict + " (SUCESSO)");
                 s++;
             } else {
-                System.out.println("O neuronio de posição " + i + "retornou: " + output.getNeurons().get(i).getOutput() + " e o valor esperado é: " + predict + " (FALHA)");
+                System.out.println("O neuronio de posição " + i + " retornou: " + output.getNeurons().get(i).getOutput() + " e o valor esperado é: " + predict + " (FALHA)");
             }
         }
 
