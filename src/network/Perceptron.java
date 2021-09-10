@@ -2,9 +2,10 @@ package network;
 
 import core.*;
 
+import java.io.*;
 import java.util.ArrayList;
 
-public class Perceptron extends NeuralNetwork {
+public class Perceptron extends NeuralNetwork implements Serializable {
     private double bias = 0;
     private double predict = 0;
     private double error;
@@ -44,6 +45,9 @@ public class Perceptron extends NeuralNetwork {
     public double newBiasCalc(double b, double deltaB) {
         return deltaB + b;
     }
+
+
+
 
     @Override
     public void setStructure(String type, int nLayer, int nNeuron) {
@@ -165,5 +169,7 @@ public class Perceptron extends NeuralNetwork {
         this.bias = newBiasCalc(bias, deltaB);
         System.out.println("Valor do novo bias..." + bias);
     }
+
+
 
 }

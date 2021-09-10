@@ -4,11 +4,13 @@ import core.*;
 import network.Mlp;
 import network.Perceptron;
 
+
 import java.util.ArrayList;
 
 public class Main {
 
     public static void main(String[] args) {
+
 
         //Execução de um MLP
 //        Neuron inputNeuron1 = new Neuron();
