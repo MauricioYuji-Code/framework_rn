@@ -1,8 +1,6 @@
 package core;
 
-import java.io.Serializable;
-
-public class Weight implements Serializable, Cloneable  {
+public class Weight {
 
     /**
      * Valor Peso

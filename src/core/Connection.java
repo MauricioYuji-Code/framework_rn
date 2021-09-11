@@ -1,15 +1,14 @@
 package core;
 
 import java.util.Objects;
-import java.io.Serializable;
 
-public class Connection implements Serializable {
+public class Connection {
 
     protected Neuron fromNeuron;
     protected Neuron toNeuron;
     protected Weight weight;
 
-    public Connection (Neuron fromNeuron, Neuron toNeuron)  {
+    public Connection(Neuron fromNeuron, Neuron toNeuron) {
 
         if (fromNeuron == null) {
             throw new IllegalArgumentException("From neuron in connection cant be null !");

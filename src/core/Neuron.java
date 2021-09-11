@@ -1,11 +1,10 @@
 package core;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Neuron implements Serializable, Cloneable  {
+public class Neuron {
 
     /**
      * Parent layer do neuron

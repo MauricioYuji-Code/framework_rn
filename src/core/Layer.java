@@ -1,12 +1,11 @@
 package core;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-public class Layer implements Serializable, Cloneable  {
+public class Layer {
 
     /**
      * Rede neural pai - à qual esta camada pertence
